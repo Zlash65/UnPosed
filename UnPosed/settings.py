@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'UnPosed.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'UnPosed.urls'
@@ -121,3 +122,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/unposd/'
+
+LOGIN_URL = '/unposd/login/'
+
+LOGIN_EXEMPT_URLS = [
+	r'^unposd/logout/$', 
+	r'^unposd/register/$'
+]
+
