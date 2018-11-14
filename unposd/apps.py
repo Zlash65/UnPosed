@@ -5,4 +5,8 @@ from django.apps import AppConfig
 
 
 class UnposdConfig(AppConfig):
-    name = 'unposd'
+	name = 'unposd'
+	verbose_name = "UnPosed"
+
+	def ready(self):
+		pass
