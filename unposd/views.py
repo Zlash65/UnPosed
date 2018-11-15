@@ -56,6 +56,8 @@ def photos_list(request, group_id):
 def photos_display(request, photo_id):
 	from unposd.models import Photos
 	photo = Photos.objects.filter(user=request.user.username).filter(photo_id=photo_id)[0]
+	photo.views += 1
+	photo.save()
 
 	args = {"photo": photo}
 	return render(request, 'main/photos_display.html', args)

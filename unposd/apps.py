@@ -55,7 +55,7 @@ def initial_setup():
 		no_of_photos = 0
 
 		for photo in photos.get("photo"):
-			image = "https://farm{0}.staticflickr.com/{1}/{2}_{3}_q.jpg".format(photo.get("farm"),
+			image = "https://farm{0}.staticflickr.com/{1}/{2}_{3}_n.jpg".format(photo.get("farm"),
 				photo.get("server"), photo.get("id"), photo.get("secret"))
 			target = "unposd/static/images/{0}/{1}.jpg".format(group, photo.get("id"))
 
@@ -76,7 +76,6 @@ def insert_group(group, total_photos, members):
 	''' insert group data in db '''
 	from unposd.models import Groups
 	group = get_group_info(group)
-	group.update({'total_photos': total_photos})
 	groups = Groups()
 	groups.group_id = group.get("group_id")
 	groups.name = group.get("name")
@@ -85,6 +84,7 @@ def insert_group(group, total_photos, members):
 	groups.iconfarm = group.get("iconfarm")
 	groups.members = '|'.join(members)
 	groups.members_count = len(members)
+	groups.total_photos = total_photos
 
 	try:
 		groups.save()
