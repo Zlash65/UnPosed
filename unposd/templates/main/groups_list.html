@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<title> Groups </title>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'main/groups.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+{% endblock %}
+
+{% block body %}
+
+<div class="center">
+	<div class="cardresult" id="results">
+		<ul>
+			{% for d in data %}
+			<li>
+				<a href="/unposd/groups/{{d.group_id}}"><h3>{{d.name}}</h3></a>
+
+				<dl class="info">
+
+					<dt><i class="fas fa-images"></i></dt>
+					<dd> {{ d.total_photos }} </dd>
+
+					<dt><i class="fas fa-users"></i></dt>
+					<dd> {{ d.members_count }} </dd>
+
+					<dt><i class="far fa-id-badge"></i></dt>
+					<dd> {{ d.group_id }} </dd>
+
+				</dl>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endblock %}

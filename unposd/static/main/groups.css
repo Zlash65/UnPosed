@@ -1,0 +1,217 @@
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	background: whitesmoke;
+}
+
+/* ------------ CARD / LIST STYLES --------------- */
+
+.center {
+	width: 80%;
+	margin-top: 2%;
+	margin-left: 16%;
+}
+
+.cardresult {
+	/* ----- default card view ----- */
+	/* ----- list view ----- */
+	text-align: center;
+	align-content: center;
+	display: inline-block;
+}
+
+.cardresult ul {
+	/* card group */
+	padding: 0;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.cardresult ul li {
+	/* individual cards */
+	list-style: none;
+	border: 1px solid lightskyblue;
+	background: white;
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px;
+	border-radius: 5px;
+	min-width: 350px;
+	max-width: 350px;
+	flex: 1 0 20%;
+	text-align: center;
+}
+
+.cardresult ul li h3 {
+	margin: 0;
+	font-size: 16px;
+	background: #dff2fe;
+	padding: 5px 5px;
+	margin-bottom: 10px;
+}
+
+.cardresult ul li dl {
+	margin: 0;
+	overflow: auto;
+}
+
+.cardresult ul li dl.info {
+	padding-left: 12%;
+	padding-top: 2%;
+	display: flex;
+}
+
+.cardresult ul li dl.info dt {
+	width: 25%;
+	text-align: center;
+}
+
+.cardresult ul li dl.info dd {
+	width: 30%;
+	font-size: 14px;
+	margin-top: 1.75em;
+	margin-left: -28%;
+	border-top: 1px solid lightgray;
+	text-align: center;
+}
+
+.cardresult ul li dl.quotes {
+	display: flex;
+}
+
+.cardresult ul li dl.quotes dt {
+	width: 20%;
+	text-align: center;
+}
+
+.cardresult ul li dl.quotes dd {
+	width: 20%;
+	margin-top: 1.75em;
+	margin-left: -20%;
+	border-top: 1px solid lightgray;
+	text-align: center;
+}
+
+.cardresult ul.header {
+	display: none;
+}
+
+.cardresult.list ul {
+	/* list group */
+	display: block;
+	margin-top: 0;
+}
+
+.cardresult.list ul li {
+	/* individual list item */
+	width: auto;
+	overflow: auto;
+	margin: 0;
+	padding: 8px 15px 5px;
+	border: none;
+	border-bottom: 1px solid lightgray;
+	border-radius: 0;
+}
+
+.cardresult.list ul li:nth-child(odd) {
+	background: #e9f6fe;
+}
+
+.cardresult.list ul li h3 {
+	float: left;
+	width: 30%;
+	min-width: 340px;
+	font-size: 14px;
+	background: transparent;
+}
+
+.cardresult.list ul li dl.info {
+	display: inline;
+	float: left;
+	width: 40%;
+}
+
+.cardresult.list ul li dl.info dt {
+	float: left;
+	width: auto;
+	text-align: left;
+	display: none;
+}
+
+.cardresult.list ul li dl.info dt:after {
+	content: ":";
+	display: inline-block;
+	margin-right: 3px;
+}
+
+.cardresult.list ul li dl.info dd {
+	float: left;
+	width: 25%;
+	margin: 0;
+	border-top: none;
+	text-align: left;
+}
+
+.cardresult.list ul li dl.quotes {
+	display: inline;
+	float: left;
+	width: 40%;
+}
+
+.cardresult.list ul li dl.quotes dt {
+	float: left;
+	width: auto;
+	text-align: left;
+	display: none;
+}
+
+.cardresult.list ul li dl.quotes dt:after {
+	content: ":";
+	display: inline-block;
+	margin-right: 3px;
+}
+
+.cardresult.list ul li dl.quotes dd {
+	float: left;
+	width: 25%;
+	margin: 0;
+	border-top: none;
+	text-align: left;
+}
+
+.cardresult.list ul.header {
+	margin: 10px 0 0;
+}
+
+.cardresult.list ul.header h3 {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.cardresult.list ul.header li {
+	padding: 10px 15px 5px;
+	background: white;
+}
+
+.cardresult.list ul.header li dl.info dt {
+	display: inline;
+	width: 25%;
+	margin: 0;
+}
+
+.cardresult.list ul.header li dl.info dt:after {
+	content: "";
+}
+
+a {
+	text-decoration: none !important;
+}
+
+img {
+	padding-bottom: 10px;
+	height: 50px;
+	width: 50px;
+}
