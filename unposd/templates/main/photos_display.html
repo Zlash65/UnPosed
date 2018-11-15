@@ -3,10 +3,8 @@
 {% block head %}
 {% load static %}
 <title> Photos </title>
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}"> -->
+
 <link rel="stylesheet" type="text/css" href="{% static 'main/photos_display.css' %}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
 {% endblock %}
@@ -15,17 +13,16 @@
 
 <div id="wrap">
 	<div class="card">
-		<!-- <div class="thumb" id="one"></div> -->
-		<!-- <div class="option"><i class="material-icons">favorite</i><i class="material-icons">edit</i><i class="material-icons">close</i></div> -->
 		<img src="{% static 'images/' %}{{photo.group_id}}/{{photo.photo_id}}.jpg" alt="">
 		<h3> {{ photo.title }} </h3>
 		<hr/>
-		<!-- <p class="price">$35.99</p>
-		<hr/> -->
+
 		<p> Views : {{ photo.views }} </p>
 		<hr/>
+
 		<p> uploaded by : {{ photo.user }} </p>
 		<hr/>
+
 		<p> tags: {{ photo.tags }}</p>
 
 	</div>

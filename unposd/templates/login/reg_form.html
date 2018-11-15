@@ -9,13 +9,15 @@
 
 {% block body %}
 	<div class="card card-container">
-		<!-- <h2> Welcome </h2> -->
+
 		<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
 		<form method="post">
 			{% csrf_token %}
 			{{ form.as_p }}
 
 			<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Register</button>
+
 		</form>
 	</div>
 {% endblock %}
