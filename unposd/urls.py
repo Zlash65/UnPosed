@@ -7,4 +7,8 @@ urlpatterns = [
 	url(r'^login/$', login, {'template_name': 'login/login.html'}),
 	url(r'^logout/$', views.logout_view),
 	url(r'^register/$', views.register, name="register"),
+	url(r'^groups/$', views.groups, name="groups"),
+	url(r'^groups/(?P<group_id>[?=@\w+]+)/$', views.photos_list),
+	url(r'^photos/(?P<photo_id>[\w+]+)/$', views.photos_display),
+	url(r'^photos/$', views.photos),
 ]
