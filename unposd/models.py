@@ -10,13 +10,13 @@ class Groups(models.Model):
 	topic_count = models.IntegerField(default=0)
 	iconserver = models.IntegerField(default=0)
 	privacy = models.CharField(max_length=20, null=True)
-	members = models.IntegerField(default=0)
+	members_count = models.IntegerField(default=0)
 	total_photos = models.IntegerField(default=0)
 	iconfarm = models.IntegerField(default=0)
 	members = models.CharField(max_length=100, null=True)
 
 class Photos(models.Model):
-	group_id = models.ForeignKey("Groups", null=True)
+	group_id = models.CharField(max_length=30, null=True)
 	photo_id = models.CharField(max_length=20, primary_key=True)
 	title = models.CharField(max_length=50)
 	views = models.IntegerField(default=0)
