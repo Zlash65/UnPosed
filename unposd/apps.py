@@ -23,6 +23,8 @@ class UnposdConfig(AppConfig):
 		if db_table_exists("unposd_groups") and db_table_exists("unposd_photos"):
 			from unposd.models import Groups
 			if not len(Groups.objects.all()):
+				print("Setting up database with dummy data...")
+				print("Please wait for a couple of minute...")
 				create_dummy_users()
 				initial_setup()
 
@@ -82,6 +84,7 @@ def insert_group(group, total_photos, members):
 	groups.privacy = group.get("privacy")
 	groups.iconfarm = group.get("iconfarm")
 	groups.members = '|'.join(members)
+	groups.members_count = len(members)
 
 	try:
 		groups.save()
@@ -95,6 +98,7 @@ def insert_photo(photo):
 	photos = Photos()
 	photos.photo_id = photo.get("photo_id")
 	photos.title = photo.get("title")
+	photos.group_id = photo.get("group_id")
 	# photos.datetaken = photo.get("datetaken")
 	photos.originalformat = photo.get("originalformat")
 	photos.iconserver = photo.get("iconserver")
@@ -103,7 +107,7 @@ def insert_photo(photo):
 	photos.nsid = photo.get("nsid")
 	photos.url = photo.get("url")
 	photos.user = photo.get("user")
-	photos.tags = '|'.join(list(photo.get("tags")))
+	photos.tags = ' | '.join(list(photo.get("tags")[0:5]))
 
 	try:
 		photos.save()
@@ -165,6 +169,18 @@ def get_photo_info(photo_id):
 
 def create_dummy_users():
 	from django.contrib.auth.models import User
-	User.objects.create_user(username='allen', password='asdf1234', is_superuser=True, is_staff=True)
-	User.objects.create_user(username='john', password='johndoe1')
-	User.objects.create_user(username='jane', password='janedoe1')
+	users = [
+		{"uname": "allen", "pwd": "asdf1234", "is_superuser": True, "is_staff": True},
+		{"uname": "john", "pwd": "johndoe1", "is_superuser": False, "is_staff": False},
+		{"uname": "jane", "pwd": "janedoe1", "is_superuser": False, "is_staff": False}
+	]
+
+	for d in users:
+		try:
+			User.objects.create_user(username=d.get("uname"), password=d.get("pwd"),
+				is_superuser=d.get("is_superuser", is_staff=d.get("is_staff")))
+		except Exception, e:
+			pass
+	# User.objects.create_user(username='allen', password='asdf1234', is_superuser=True, is_staff=True)
+	# User.objects.create_user(username='john', password='johndoe1')
+	# User.objects.create_user(username='jane', password='janedoe1')
