@@ -6,7 +6,8 @@
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}"> -->
 <link rel="stylesheet" type="text/css" href="{% static 'main/groups.css' %}">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+ crossorigin="anonymous">
 
 
 {% endblock %}
@@ -18,7 +19,9 @@
 		<ul>
 			{% for d in data %}
 			<li>
-				<a href="/unposd/groups/{{d.group_id}}"><h3>{{d.name}}</h3></a>
+				<a href="/unposd/groups/{{d.group_id}}">
+					<h3>{{d.name}}</h3>
+				</a>
 
 				<dl class="info">
 
@@ -37,4 +40,31 @@
 		</ul>
 	</div>
 </div>
+
+<div class="navbar navbar-fixed-bottom fix-bottom">
+	<div class="button-bar">
+		{% if not page == 1%}
+			<a class="button prev" onclick="decrement('{{page}}')"> Previous </a>
+		{% endif %}
+
+		{% if not last%}
+			<a class="button next" onclick="increment('{{page}}')"> Next </a>
+		{% endif %}
+	</div>
+</div>
+
+<script>
+	var decrement = function (page) {
+		var page = parseInt(page) - 1;
+		var location = window.location.href.split('?')[0] + '?page=' + page;
+		window.location = location;
+	}
+
+	var increment = function (page) {
+		var page = parseInt(page) + 1;
+		var location = window.location.href.split('?')[0] + '?page=' + page;
+		window.location = location;
+	}
+</script>
+
 {% endblock %}

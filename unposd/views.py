@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+max_per_page = 6
 
 def home(request):
 	# return render(request, 'base.html')
@@ -30,24 +30,27 @@ def register(request):
 
 def groups(request):
 	from unposd.models import Groups
+	page = int(request.GET.get('page', '1'))
 	groups = list(Groups.objects.extra(where=["members like '%%%{0}%%%'"
 		.format(request.user.username)]))
+	args = get_paging_index(groups, page)
 
-	args = {"data": groups}
+	# args = {"data": groups}
+
 	return render(request, 'main/groups_list.html', args)
 
 def photos_list(request, group_id):
 	from unposd.models import Photos
+	page = int(request.GET.get('page', '1'))
 	photos = list(Photos.objects.filter(user=request.user.username).filter(group_id=group_id))
+	args = get_paging_index(photos, page)
 
 	# tags_view = {}
 	# for d in photos:
 	# 	tags_view[d.photo_id] = len(d.tags.split(' | '))
 
-	args = {
-		"data": photos,
-		# "tags_view": tags_view
-	}
+	# args.update({"tags_view": tags_view})
+
 	return render(request, 'main/photos_list.html', args)
 
 def photos_display(request, photo_id):
@@ -60,29 +63,40 @@ def photos_display(request, photo_id):
 def photos(request):
 	from unposd.models import Photos
 	group_id = request.GET.get('group','')
+	page = int(request.GET.get('page', '1'))
 
 	if group_id:
 		photos = list(Photos.objects.filter(user=request.user.username).filter(group_id=group_id))
+		args = get_paging_index(photos, page)
 
 		# tags_view = {}
 		# for d in photos:
 		# 	tags_view[d.photo_id] = len(d.tags.split(' | '))
 
-		args = {
-			"data": photos,
-			# "tags_view": tags_view
-		}
+		# args["tags_view"] = tags_view
+
 		return render(request, 'main/photos_list.html', args)
 	else:
 		photos = list(Photos.objects.filter(user=request.user.username))
+		args = get_paging_index(photos, page)
 
 		# tags_view = {}
 		# for d in photos:
 		# 	tags_view[d.photo_id] = len(d.tags.split(' | '))
 
-		args = {
-			"data": photos,
-			# "tags_view": tags_view
-		}
+		# args["tags_view"] = tags_view
+
 		return render(request, 'main/photos_list.html', args)
 
+def get_paging_index(data, page):
+	start_index, end_index = ((page-1)*max_per_page), (page*max_per_page)
+
+	args = {"last": False}
+	if end_index < len(data):
+		args["data"] = data[start_index:end_index]
+	else:
+		args["data"], args["last"] = data[start_index:end_index], True
+
+	args["page"] = page
+
+	return args
