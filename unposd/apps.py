@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 import flickrapi, os, urllib
 from random import randint
+import sys
 
 api_key = 'f2dde0fc40550083e8c8ccd08d1d0a6e'
 api_secret = 'f680d9cb8a600510'
@@ -55,6 +56,10 @@ def initial_setup():
 		no_of_photos = 0
 
 		for photo in photos.get("photo"):
+			sys.stdout.write('Setting up photos and members for group %s [%s%s]\r' \
+				% (group, "="*(no_of_photos+1), " "*(len(photos.get("photo"))-(no_of_photos+1))))
+			sys.stdout.flush()
+
 			image = "https://farm{0}.staticflickr.com/{1}/{2}_{3}_n.jpg".format(photo.get("farm"),
 				photo.get("server"), photo.get("id"), photo.get("secret"))
 			target = "unposd/static/images/{0}/{1}.jpg".format(group, photo.get("id"))
@@ -71,6 +76,7 @@ def initial_setup():
 				urllib.urlretrieve(image, target)
 
 		insert_group(group, no_of_photos, users[randint(0,2)])
+		print()
 
 def insert_group(group, total_photos, members):
 	''' insert group data in db '''
