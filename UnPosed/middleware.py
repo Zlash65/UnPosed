@@ -1,7 +1,7 @@
 import re
 
 from django.conf import settings
-from django.shortcuts import redirect
+from unposd.views import login
 
 EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip('/'))]
 if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
@@ -21,4 +21,4 @@ class LoginRequiredMiddleware:
 
 		if not request.user.is_authenticated:
 			if not any(url.match(path) for url in EXEMPT_URLS):
-				return redirect(settings.LOGIN_URL)
+				return login(request, alert="Authentication required!")
