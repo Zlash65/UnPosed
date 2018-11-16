@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
@@ -11,6 +11,22 @@ max_per_page = 6
 def home(request):
 	# return render(request, 'base.html')
 	return redirect('/unposd/photos')
+
+def login(request, alert=None):
+	if request.method == 'POST' and not alert:
+		form = AuthenticationForm(data=request.POST)
+		if form.is_valid():
+			from django.contrib.auth import login
+			login(request, form.get_user())
+			return redirect('/unposd/photos')
+		else:
+			args = {"form": form}
+			return render(request, 'login/login.html', args)
+	else:
+		form = AuthenticationForm(request)
+
+		args = {"form": form, "alert": alert}
+		return render(request, 'login/login.html', args)
 
 def logout_view(request):
 	logout(request)

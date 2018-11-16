@@ -4,12 +4,12 @@
 	{% load static %}
 	<title> Login </title>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
 {% endblock %}
 
 {% block body %}
 	<div class="card card-container">
-
 		<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 
 		<form method="post">
@@ -20,4 +20,23 @@
 
 		</form>
 	</div>
+
+	<script>
+		var error = $('.errorlist');
+		$.each(error, function(index, el) {
+			var _this = $(el);
+			if (_this.hasClass('nonfield')) {
+				_this.css("display", "");
+			} else {
+				_this.css("display", "none");
+			}
+		});
+	</script>
+
+	{% if alert %}
+		<script>
+			alert('{{alert}}');
+			window.location.href = "/unposd/login";
+		</script>
+	{% endif %}
 {% endblock %}
