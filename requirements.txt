@@ -1,1 +1,3 @@
 flickrapi
+django
+django-extensions
