@@ -178,7 +178,7 @@ def create_dummy_users():
 	for d in users:
 		try:
 			User.objects.create_user(username=d.get("uname"), password=d.get("pwd"),
-				is_superuser=d.get("is_superuser", is_staff=d.get("is_staff")))
+				is_superuser=d.get("is_superuser"), is_staff=d.get("is_staff"))
 		except Exception, e:
 			pass
 	# User.objects.create_user(username='allen', password='asdf1234', is_superuser=True, is_staff=True)
