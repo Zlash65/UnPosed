@@ -16,6 +16,9 @@ class LoginRequiredMiddleware:
 		return response
 
 	def process_view(self, request, view_func, view_args, view_kwargs):
+		''' intervene in between each route to see if the user is allowed to view it
+			else throw am authentication required alert and route to login page
+		'''
 		assert hasattr(request, 'user')
 		path = request.path_info.lstrip('/')
 

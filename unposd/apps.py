@@ -21,6 +21,7 @@ class UnposdConfig(AppConfig):
 		if self.ready_has_run:
 			return
 
+		# this code is run on the very first start of server
 		if db_table_exists("unposd_groups") and db_table_exists("unposd_photos"):
 			from unposd.models import Groups
 			if not len(Groups.objects.all()):
@@ -32,11 +33,21 @@ class UnposdConfig(AppConfig):
 		self.ready_has_run = True
 
 def db_table_exists(table_name):
+	''' check if the tables are already created or not '''
 	from django.db import connection
 	return table_name in connection.introspection.table_names()
 
 def initial_setup():
+	'''
+		Groups are shortlisted to create a dummy environment.
+		Random number (between 20 to 30) of photos are fetched from flickr for each group.
+		Groups are stored in django database using groups model.
+		Photos are stored in django database using photos model.
+		Photos are stored in static/images folder.
+	'''
+
 	users = [['jane'], ['john'], ['jane', 'john']]
+
 	# group_id shortlisted to create a dummy environment
 	groups = ["4522828@N24", "2740203@N20", "1986740@N21",
 		"56407608@N00", "535624@N24", "3007017@N22"]
@@ -76,10 +87,10 @@ def initial_setup():
 				urllib.urlretrieve(image, target)
 
 		insert_group(group, no_of_photos, users[randint(0,2)])
-		print()
+		print("")
 
 def insert_group(group, total_photos, members):
-	''' insert group data in db '''
+	''' insert group data in database using Groups model '''
 	from unposd.models import Groups
 	group = get_group_info(group)
 	groups = Groups()
@@ -99,7 +110,7 @@ def insert_group(group, total_photos, members):
 		pass
 
 def insert_photo(photo):
-	''' insert photo data in db '''
+	''' insert photo data in database using Photos model '''
 	from unposd.models import Photos
 	photos = Photos()
 	photos.photo_id = photo.get("photo_id")
@@ -131,7 +142,7 @@ def search_group_by_text(txt, per_page=5):
 	return groups
 
 def get_group_info(group_id):
-	''' fetches detail of a group '''
+	''' fetches detail of a group from flickr '''
 	if not group_id: return False
 
 	group = flickr.groups.getInfo(group_id=group_id).get("group")
@@ -149,7 +160,7 @@ def get_group_info(group_id):
 	}
 
 def get_photo_info(photo_id):
-	''' fetches detail of a photo '''
+	''' fetches detail of a photo from flickr '''
 	if not photo_id: return False
 
 	photo = flickr.photos.getInfo(photo_id=photo_id).get("photo")
@@ -174,6 +185,8 @@ def get_photo_info(photo_id):
 	}
 
 def create_dummy_users():
+	''' creates 1 superuser and 2 dummy users '''
+
 	from django.contrib.auth.models import User
 	users = [
 		{"uname": "allen", "pwd": "asdf1234", "is_superuser": True, "is_staff": True},

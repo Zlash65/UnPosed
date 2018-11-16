@@ -5,6 +5,8 @@ from django.db import models
 
 # Create your models here.
 class Groups(models.Model):
+	''' Groups model '''
+
 	group_id = models.CharField(max_length=20, primary_key=True)
 	name = models.CharField(max_length=50)
 	topic_count = models.IntegerField(default=0)
@@ -16,6 +18,8 @@ class Groups(models.Model):
 	members = models.CharField(max_length=100, null=True)
 
 class Photos(models.Model):
+	''' Photos model '''
+
 	group_id = models.CharField(max_length=30, null=True)
 	photo_id = models.CharField(max_length=20, primary_key=True)
 	title = models.CharField(max_length=50)
