@@ -4,6 +4,7 @@
 	{% load static %}
 	<title> Register </title>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
 {% endblock %}
 
@@ -20,4 +21,22 @@
 
 		</form>
 	</div>
+
+	<script>
+		var error = $('.errorlist');
+		$.each(error, function(index, el) {
+			var _this = $(el);
+			if (_this.hasClass('nonfield')) {
+				_this.css("display", "");
+			} else {
+				_this.css("display", "none");
+			}
+		});
+	</script>
+
+	{% if alert %}
+		<script>
+			alert('{{alert}}');
+		</script>
+	{% endif %}
 {% endblock %}

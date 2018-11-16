@@ -38,6 +38,9 @@ def register(request):
 		if form.is_valid():
 			form.save()
 			return redirect('/unposd')
+		else:
+			args = {"form": form, "alert": "Wrong data inserted. Please try again!"}
+			return render(request, 'login/reg_form.html', args)
 	else:
 		form = UserCreationForm()
 
