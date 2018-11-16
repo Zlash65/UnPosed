@@ -127,6 +127,7 @@ LOGIN_REDIRECT_URL = '/unposd/'
 LOGIN_URL = '/unposd/login/'
 
 LOGIN_EXEMPT_URLS = [
+	r'^$',
 	r'^unposd/logout/$', 
 	r'^unposd/register/$'
 ]
