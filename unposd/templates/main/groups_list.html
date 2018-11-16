@@ -36,18 +36,18 @@
 				</li>
 			{% endfor %}
 		</ul>
-	</div>
-</div>
 
-<div class="navbar navbar-fixed-bottom fix-bottom">
-	<div class="button-bar">
-		{% if not page == 1%}
-			<a class="button prev" onclick="decrement('{{page}}')"> Previous </a>
-		{% endif %}
-
-		{% if not last%}
-			<a class="button next" onclick="increment('{{page}}')"> Next </a>
-		{% endif %}
+		<div class="fix-bottom">
+			<div class="button-bar">
+				{% if not page == 1%}
+					<a class="button prev" onclick="decrement('{{page}}')"> Previous </a>
+				{% endif %}
+		
+				{% if not last%}
+					<a class="button next" onclick="increment('{{page}}')"> Next </a>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 </div>
 

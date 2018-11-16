@@ -82,8 +82,8 @@ img {
 	margin: 0;
 	padding-left: 14px;
 	padding-right: 14px;
-	padding-top: 4px;
-	padding-bottom: 4px;
+	padding-top: 1px;
+	padding-bottom: 2px;
 	background: #0d5287;
 	color: white;
 	font-size: 14px;
@@ -124,7 +124,7 @@ img {
 
 .next::after {
 	right: -22px;
-	border-width: 12px;
+	border-width: 11px;
 	border-color: transparent transparent transparent #0d5287;
 }
 
@@ -139,9 +139,16 @@ img {
 .prev::after {
 	left: -22px;
 	border-color: transparent #0d5287 transparent transparent;
-	border-width: 12px;
+	border-width: 11px;
 }
 
 .prev:hover::after {
 	border-right-color: #0585e8;
+}
+
+.fix-bottom {
+	width: 80%;
+	padding-left: 2.5%;
+	padding-top: 10px;
+	display: absolute;
 }
