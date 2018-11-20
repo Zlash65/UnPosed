@@ -84,7 +84,10 @@ def initial_setup():
 
 			if insert_photo(ph):
 				no_of_photos += 1
-				urllib.urlretrieve(image, target)
+				try:
+					urllib.urlretrieve(image, target)
+				except AttributeError:
+					urllib.request.urlretrieve(image, target)
 
 		insert_group(group, no_of_photos, users[randint(0,2)])
 		print("")
@@ -105,7 +108,7 @@ def insert_group(group, total_photos, members):
 
 	try:
 		groups.save()
-	except Exception, e:
+	except Exception as e:
 		# print(e)
 		pass
 
@@ -129,7 +132,7 @@ def insert_photo(photo):
 	try:
 		photos.save()
 		return True
-	except Exception, e:
+	except Exception as e:
 		# print(e)
 		return False
 
@@ -198,7 +201,7 @@ def create_dummy_users():
 		try:
 			User.objects.create_user(username=d.get("uname"), password=d.get("pwd"),
 				is_superuser=d.get("is_superuser"), is_staff=d.get("is_staff"))
-		except Exception, e:
+		except Exception as e:
 			pass
 	# User.objects.create_user(username='allen', password='asdf1234', is_superuser=True, is_staff=True)
 	# User.objects.create_user(username='john', password='johndoe1')

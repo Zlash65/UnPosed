@@ -57,7 +57,7 @@ class PhotoDB():
 			''' % (', '.join(columns), ','.join(['?'] * len(columns))), tuple(values))
 			self.conn.commit()
 			return True
-		except Exception, e:
+		except Exception as e:
 			print(e)
 			return False
 
@@ -75,6 +75,6 @@ class PhotoDB():
 			''' % (', '.join(columns), ','.join(['?'] * len(columns))), tuple(values))
 			self.conn.commit()
 			return True
-		except Exception, e:
-			print(e, "hree")
+		except Exception as e:
+			print(e)
 			return False
